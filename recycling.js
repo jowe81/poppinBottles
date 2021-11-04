@@ -7,6 +7,8 @@ const recycle = (bottles, caps) => {
   let newBottlesFromBottles = Math.floor(bottles / 2);
   let newBottlesFromCaps = Math.floor(caps / 4);
   result.newBottles = newBottlesFromBottles + newBottlesFromCaps;
+  result.newBottlesFromBottles = newBottlesFromBottles;
+  result.newBottlesFromCaps = newBottlesFromCaps;
   result.leftOverCaps = caps % 4;
   result.leftOverBottles = bottles % 2;
   return result;
@@ -23,16 +25,25 @@ const calculateTotalReturn = (amount) => {
   let bottles = Math.floor(amount / 2);
   let caps = bottles;
   let thisRoundResult;
-  let totalBottles = bottles;
-  //console.log("initial bottles",bottles," and caps ",caps);
+  let finalResult = {
+    totalBottles: 0,
+    earnedFromBottles: 0,
+    earnedFromCaps: 0,
+    leftOverBottles: 0,
+    leftOverCaps: 0,
+  };
+  finalResult.totalBottles = bottles;
   do {
     thisRoundResult = recycle(bottles, caps);
-    totalBottles += thisRoundResult.newBottles;
+    finalResult.totalBottles += thisRoundResult.newBottles;
+    finalResult.earnedFromBottles += thisRoundResult.newBottlesFromBottles;
+    finalResult.earnedFromCaps += thisRoundResult.newBottlesFromCaps;
     bottles = thisRoundResult.newBottles + thisRoundResult.leftOverBottles;
     caps = thisRoundResult.newBottles + thisRoundResult.leftOverCaps;
-    //console.log ("this round result:",thisRoundResult);
   } while (bottles >= 2 || caps >= 4);
-  return totalBottles;
+  finalResult.leftOverBottles = bottles;
+  finalResult.leftOverCaps = caps;
+  return finalResult;
 };
 
 module.exports = {
