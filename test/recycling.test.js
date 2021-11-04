@@ -5,18 +5,18 @@ describe("recycling library", () => {
 
   describe("helper functions", () => {
 
-    describe("calculateTotalReturn (dollar amount)", () => {
+    describe("calculateTotalReturn, total bottles (dollar amount)", () => {
 
       it("should return 15 for 10", () => {
-        assert.equal(recycling.calculateTotalReturn(10), 15);
+        assert.equal(recycling.calculateTotalReturn(10).totalBottles, 15);
       });
 
       it("should return 35 for 20", () => {
-        assert.equal(recycling.calculateTotalReturn(20), 35);
+        assert.equal(recycling.calculateTotalReturn(20).totalBottles, 35);
       });
 
       it("should return 75 for 40", () => {
-        assert.equal(recycling.calculateTotalReturn(40), 75);
+        assert.equal(recycling.calculateTotalReturn(40).totalBottles, 75);
       });
 
     });
