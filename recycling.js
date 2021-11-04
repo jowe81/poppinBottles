@@ -46,6 +46,7 @@ const calculateTotalReturn = (amount) => {
   return finalResult;
 };
 
+// This far more efficient function will return correct results for amount >3
 const calculateTotalReturn2 = (amount) => {
   if (amount % 2) amount--;
   let totalBottles = amount * 2 - 5;
