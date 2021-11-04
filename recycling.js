@@ -46,7 +46,23 @@ const calculateTotalReturn = (amount) => {
   return finalResult;
 };
 
+const calculateTotalReturn2 = (amount) => {
+  if (amount % 2) amount--;
+  let totalBottles = amount * 2 - 5;
+  let totalEarned = totalBottles - Math.floor(amount / 2);
+  let earnedFromCaps = Math.floor(totalEarned / 3);
+  let earnedFromBottles = earnedFromCaps * 2 + 1;
+  return {
+    totalBottles: totalBottles,
+    earnedFromBottles: earnedFromBottles,
+    earnedFromCaps: earnedFromCaps,
+    leftOverBottles: 1,
+    leftOverCaps: 3
+  };
+};
+
 module.exports = {
   recycle: recycle,
   calculateTotalReturn: calculateTotalReturn,
+  calculateTotalReturn2: calculateTotalReturn2,
 };

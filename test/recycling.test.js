@@ -30,6 +30,16 @@ describe("recycling library", () => {
 
     });
 
+    describe("calculateTotalReturn2 (alternate implementation)", ()=>{
+
+      for (let n = 0; n < 50; n++) {
+        it(`should return the same object as calculateTotalReturn for ${n}`, ()=>{
+          assert.deepEqual(recycling.calculateTotalReturn(n), recycling.calculateTotalReturn2(n));
+        });
+      }
+
+    });
+
   });
 
 });

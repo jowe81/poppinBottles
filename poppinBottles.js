@@ -13,9 +13,11 @@ const printResults = (result) => {
 
 if (process.argv.length > 2) {
   const amount = process.argv[2];
-  if (!isNaN(amount))
+  if (!isNaN(amount)) {
+    
     printResults(recycling.calculateTotalReturn(amount));
-  else 
+    printResults(recycling.calculateTotalReturn2(amount));
+  } else 
     console.log("Error: Invalid amount given. Please provide a number.");
 } else {
   console.log("Error: Please provide a dollar amount.");
