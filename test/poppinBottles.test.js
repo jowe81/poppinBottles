@@ -5,14 +5,18 @@ describe("poppinBottles", () => {
 
   describe("helper functions", () => {
 
-    describe("getBottlesfromBottles", () => {
+    describe("calculateTotalReturn (dollar amount)", () => {
 
-      it("should return 9 for 10", () => {
-        assert.equal(poppinBottles.getBottlesFromBottles(10), 9);
+      it("should return 15 for 10", () => {
+        assert.equal(poppinBottles.calculateTotalReturn(10), 15);
       });
 
-      it("should return 19 for 20", () => {
-        assert.equal(poppinBottles.getBottlesFromBottles(20), 19);
+      it("should return 35 for 20", () => {
+        assert.equal(poppinBottles.calculateTotalReturn(20), 35);
+      });
+
+      it("should return 75 for 40", () => {
+        assert.equal(poppinBottles.calculateTotalReturn(40), 75);
       });
 
     });

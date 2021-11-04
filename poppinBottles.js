@@ -1,98 +1,41 @@
-const poppinBottles = () => {
-  /*
-
-
-    calcTotalBottles(amount)
-
-      Calculate # of bottles purchased directly
-      
-      Calculate # of bottles earned through recycling bottles (recursively)
-      
-      Calculate # of bottles earned through recycling all the caps
-
-  */
-
-
-
-
-
-};
-
 /*
-  Calculate bottles redeemed directly (from 10)
-    From bottles (5/0)
-    From caps (2/2)
-
-  Calculate leftover bottles
-  Calculate leftover caps
-
-  If leftover + redeemed directly >= 2
-    result = redeemed directly + getBottlesFromBottles(redeemed directly + leftover)
+  Calculate new bottles, leftover caps, and leftover bottles
+  for one set of recycling input data (bottles, caps)
 */
-const getBottlesFromBottles = (n) => {
-  const redeemedBottles = Math.floor(n / 2);
-  const leftOverBottles = n % 2;
-  let result;
-  if (redeemedBottles + leftOverBottles >= 2) {
-    result = redeemedBottles + getBottlesFromBottles(redeemedBottles + leftOverBottles);
-  } else {
-    result = redeemedBottles;
-  }
-  return result;
-};
-
-// Same principle as getBottlesFromBottles
-const getBottlesFromCaps = (n) => {
-  const redeemedBottles = Math.floor(n / 4);
-  const leftOverCaps = n % 4;
-  if (redeemedBottles + leftOverBottles >= 2) {
-    result = redeemedBottles + getBottlesFromBottles(redeemedBottles + leftOverBottles);
-  } else {
-    result = redeemedBottles;
-  }
-  let result;
-}
-
-
 const recycle = (bottles, caps) => {
   let result = {};
-  if (bottles < 2 && caps < 4) {
-    //Not enough bottles or caps to redeem any more bottles
-    result.newBottles = 0;
-    result.leftOverCaps = caps;
-    result.leftOverBottles = bottles;
-  } else {
-    //Recycle this round
-    let newBottlesFromBottles = Math.floor(bottles / 2);
-    let newBottlesFromCaps = Math.floor(caps / 4);
-    result.newBottles = newBottlesFromBottles + newBottlesFromCaps;
-    result.leftOverCaps = caps % 4;
-    result.leftOverBottles = bottles % 2;
-  }
+  let newBottlesFromBottles = Math.floor(bottles / 2);
+  let newBottlesFromCaps = Math.floor(caps / 4);
+  result.newBottles = newBottlesFromBottles + newBottlesFromCaps;
+  result.leftOverCaps = caps % 4;
+  result.leftOverBottles = bottles % 2;
   return result;
 };
 
+
+/*
+  Purchase bottles from money
+  do
+    recycle empty bottles and caps
+  while (there are at least 2 bottles or at least 4 caps to recycle)
+*/
 const calculateTotalReturn = (amount) => {
   let bottles = Math.floor(amount / 2);
   let caps = bottles;
   let thisRoundResult;
   let totalBottles = bottles;
-  console.log("initial bottles",bottles," and caps ",caps);
+  //console.log("initial bottles",bottles," and caps ",caps);
   do {
     thisRoundResult = recycle(bottles, caps);
     totalBottles += thisRoundResult.newBottles;
     bottles = thisRoundResult.newBottles + thisRoundResult.leftOverBottles;
     caps = thisRoundResult.newBottles + thisRoundResult.leftOverCaps;
-    console.log ("this round result:",thisRoundResult);
+    //console.log ("this round result:",thisRoundResult);
   } while (bottles >= 2 || caps >= 4);
   return totalBottles;
 };
 
-console.log(calculateTotalReturn(10));
-
 module.exports = {
-  getBottlesFromBottles: getBottlesFromBottles,
-  poppinBottles: poppinBottles,
   recycle: recycle,
   calculateTotalReturn: calculateTotalReturn,
 };
