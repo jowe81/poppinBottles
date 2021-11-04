@@ -11,6 +11,10 @@ describe("poppinBottles", () => {
         assert.equal(poppinBottles.getBottlesFromBottles(10), 9);
       });
 
+      it("should return 19 for 20", () => {
+        assert.equal(poppinBottles.getBottlesFromBottles(20), 19);
+      });
+
     });
 
   });
