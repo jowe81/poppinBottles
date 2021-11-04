@@ -67,15 +67,32 @@ const recycle = (bottles, caps) => {
     let newBottlesFromCaps = Math.floor(caps / 4);
     result.newBottles = newBottlesFromBottles + newBottlesFromCaps;
     result.leftOverCaps = caps % 4;
-    result.leftOverBottles = bottles % 2;  
+    result.leftOverBottles = bottles % 2;
   }
   return result;
 };
 
-console.log(recycle(10,10));
+const calculateTotalReturn = (amount) => {
+  let bottles = Math.floor(amount / 2);
+  let caps = bottles;
+  let thisRoundResult;
+  let totalBottles = bottles;
+  console.log("initial bottles",bottles," and caps ",caps);
+  do {
+    thisRoundResult = recycle(bottles, caps);
+    totalBottles += thisRoundResult.newBottles;
+    bottles = thisRoundResult.newBottles + thisRoundResult.leftOverBottles;
+    caps = thisRoundResult.newBottles + thisRoundResult.leftOverCaps;
+    console.log ("this round result:",thisRoundResult);
+  } while (bottles >= 2 || caps >= 4);
+  return totalBottles;
+};
+
+console.log(calculateTotalReturn(10));
 
 module.exports = {
   getBottlesFromBottles: getBottlesFromBottles,
   poppinBottles: poppinBottles,
-  recycle: recycle
+  recycle: recycle,
+  calculateTotalReturn: calculateTotalReturn,
 };
