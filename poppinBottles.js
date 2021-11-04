@@ -22,4 +22,7 @@ const getBottlesFromBottles = (n) => {
   return result;
 };
 
-module.exports = poppinBottles;
+module.exports = {
+  getBottlesFromBottles: getBottlesFromBottles,
+  poppinBottles: poppinBottles,
+};
